@@ -1,0 +1,26 @@
+[
+  {
+    "id": "usr-001",
+    "nome": "Kauan Santos",
+    "email": "kauan@teresina.gov.br",
+    "senha": "senha123",
+    "perfil": "cidadao",
+    "avatar": "KS"
+  },
+  {
+    "id": "usr-002",
+    "nome": "Maria Oliveira",
+    "email": "maria@email.com",
+    "senha": "maria2024",
+    "perfil": "cidadao",
+    "avatar": "MO"
+  },
+  {
+    "id": "usr-003",
+    "nome": "Admin Sistema",
+    "email": "admin@teresina.gov.br",
+    "senha": "admin123",
+    "perfil": "admin",
+    "avatar": "AD"
+  }
+]

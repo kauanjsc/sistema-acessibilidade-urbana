@@ -1,0 +1,42 @@
+[
+  {
+    "id": "aval-001",
+    "localId": 4,
+    "acessivel": true,
+    "comentario": "Excelente estrutura! O hospital possui rampas largas, elevadores funcionando e banheiros adaptados em todos os andares. Recomendo a todos que precisam de atendimento acessível.",
+    "autor": "Maria S.",
+    "data": "2026-02-10T14:30:00.000Z"
+  },
+  {
+    "id": "aval-002",
+    "localId": 4,
+    "acessivel": true,
+    "comentario": "Fui acompanhar minha mãe cadeirante e não tivemos nenhuma dificuldade. As vagas PCD são bem sinalizadas e os corredores são amplos.",
+    "autor": "João P.",
+    "data": "2026-01-22T09:15:00.000Z"
+  },
+  {
+    "id": "aval-003",
+    "localId": 9,
+    "acessivel": false,
+    "comentario": "Infelizmente o acesso é muito difícil. O piso é irregular, não há rampa na entrada e o espaço interno é estreito para cadeiras de rodas. Precisa urgentemente de melhorias.",
+    "autor": "Carlos R.",
+    "data": "2026-02-28T11:00:00.000Z"
+  },
+  {
+    "id": "aval-004",
+    "localId": 1,
+    "acessivel": true,
+    "comentario": "Shopping muito bem adaptado. Piso tátil em todo o corredor principal, elevadores espaçosos e banheiro familiar acessível no segundo piso.",
+    "autor": "Ana L.",
+    "data": "2026-03-01T16:45:00.000Z"
+  },
+  {
+    "id": "aval-005",
+    "localId": 17,
+    "acessivel": false,
+    "comentario": "Teatro histórico lindo, mas sem nenhuma adaptação para PCD. Escadas na entrada, corredores estreitos e sem banheiro adaptado. Espero que a reforma inclua esses recursos.",
+    "autor": "Pedro M.",
+    "data": "2026-02-14T19:20:00.000Z"
+  }
+]

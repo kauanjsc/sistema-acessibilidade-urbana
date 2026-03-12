@@ -1,0 +1,382 @@
+[
+  {
+    "id": 1,
+    "nome": "Shopping Rio Poty",
+    "tipo": "shopping",
+    "tipoLabel": "Shopping Center",
+    "endereco": "Av. Marechal Castelo Branco, 4230 — Ilhotas",
+    "bairro": "Ilhotas",
+    "lat": -5.0878,
+    "lng": -42.8007,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": true,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": true
+    },
+    "descricao": "Shopping com estrutura completa de acessibilidade, incluindo piso tátil, elevadores em todos os pavimentos e fraldário adaptado."
+  },
+  {
+    "id": 2,
+    "nome": "Shopping da Cidade",
+    "tipo": "shopping",
+    "tipoLabel": "Shopping Center",
+    "endereco": "Av. Frei Serafim, 1456 — Centro",
+    "bairro": "Centro",
+    "lat": -5.0924,
+    "lng": -42.8021,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": true,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": false
+    },
+    "descricao": "Shopping no centro da cidade com boas estruturas de acessibilidade interna, mas calçadas do entorno apresentam irregularidades."
+  },
+  {
+    "id": 3,
+    "nome": "Teresina Shopping",
+    "tipo": "shopping",
+    "tipoLabel": "Shopping Center",
+    "endereco": "Av. Raul Lopes, 1000 — Jóquei",
+    "bairro": "Jóquei",
+    "lat": -5.0743,
+    "lng": -42.7843,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": true,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": true
+    },
+    "descricao": "Shopping moderno com estrutura acessível completa. Possui serviço de empréstimo de cadeiras de rodas e equipe treinada para atendimento inclusivo."
+  },
+  {
+    "id": 4,
+    "nome": "Hospital Getúlio Vargas (HGV)",
+    "tipo": "hospital",
+    "tipoLabel": "Hospital",
+    "endereco": "Av. Frei Serafim, 2352 — Vermelha",
+    "bairro": "Vermelha",
+    "lat": -5.0869,
+    "lng": -42.8065,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": true,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": true
+    },
+    "descricao": "Principal hospital público do Piauí. Possui estrutura de acessibilidade abrangente com piso tátil, rampas e elevadores em todos os setores."
+  },
+  {
+    "id": 5,
+    "nome": "UFPI — Campus Ministro Petrônio Portela",
+    "tipo": "educacao",
+    "tipoLabel": "Universidade",
+    "endereco": "Av. Universitária, S/N — Ininga",
+    "bairro": "Ininga",
+    "lat": -5.0569,
+    "lng": -42.7862,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": false,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": false
+    },
+    "descricao": "Campus universitário com rampas e vagas PCD nos principais blocos. Alguns pavilhões mais antigos ainda carecem de elevadores e calçadas regulares."
+  },
+  {
+    "id": 6,
+    "nome": "Praça da Liberdade",
+    "tipo": "espaco_publico",
+    "tipoLabel": "Praça / Espaço Público",
+    "endereco": "Praça da Liberdade, S/N — Centro",
+    "bairro": "Centro",
+    "lat": -5.0909,
+    "lng": -42.8017,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": false,
+      "vagaPCD": true,
+      "elevador": false,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": true
+    },
+    "descricao": "Praça central revitalizada com rampas de acesso e piso tátil. Não possui banheiro adaptado no local."
+  },
+  {
+    "id": 7,
+    "nome": "Estação Cidadania (SEMCASPI)",
+    "tipo": "servico_publico",
+    "tipoLabel": "Serviço Público",
+    "endereco": "Rua Álvaro Mendes, 2255 — Centro",
+    "bairro": "Centro",
+    "lat": -5.0896,
+    "lng": -42.8044,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": false,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": true
+    },
+    "descricao": "Equipamento público de assistência social com boa estrutura de acessibilidade no andar térreo. Atendimento prioritário para PCD."
+  },
+  {
+    "id": 8,
+    "nome": "Banco do Brasil — Agência Centro",
+    "tipo": "banco",
+    "tipoLabel": "Agência Bancária",
+    "endereco": "Rua Paissandu, 1155 — Centro",
+    "bairro": "Centro",
+    "lat": -5.0915,
+    "lng": -42.8033,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": false,
+      "vagaPCD": false,
+      "elevador": false,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": false
+    },
+    "descricao": "Agência bancária com entrada acessível e caixas de atendimento prioritário. Calçada do entorno com irregularidades."
+  },
+  {
+    "id": 9,
+    "nome": "Mercado do Peixe",
+    "tipo": "mercado",
+    "tipoLabel": "Mercado / Feira",
+    "endereco": "Av. Maranhão, S/N — Poti Velho",
+    "bairro": "Poti Velho",
+    "lat": -5.0680,
+    "lng": -42.8094,
+    "acessibilidade": {
+      "rampa": false,
+      "banheiroAdaptado": false,
+      "vagaPCD": false,
+      "elevador": false,
+      "entradaAcessivel": false,
+      "calcadaAcessivel": false
+    },
+    "descricao": "Mercado público histórico sem estrutura de acessibilidade adequada. Requer melhorias urgentes para inclusão de PCD."
+  },
+  {
+    "id": 10,
+    "nome": "Centro Cultural Afro-Piauiense",
+    "tipo": "cultura",
+    "tipoLabel": "Centro Cultural",
+    "endereco": "Rua Lisandro Nogueira, 200 — Centro",
+    "bairro": "Centro",
+    "lat": -5.0945,
+    "lng": -42.8019,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": false,
+      "elevador": false,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": true
+    },
+    "descricao": "Espaço cultural com rampas e banheiro adaptado. Sem vagas PCD no estacionamento próprio."
+  },
+  {
+    "id": 11,
+    "nome": "Aeroporto Senador Petrônio Portela",
+    "tipo": "transporte",
+    "tipoLabel": "Aeroporto",
+    "endereco": "Av. Centenário, S/N — São Cristóvão",
+    "bairro": "São Cristóvão",
+    "lat": -5.0598,
+    "lng": -42.8239,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": true,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": true
+    },
+    "descricao": "Terminal aeroportuário com estrutura de acessibilidade completa, incluindo serviço de transporte interno para PCD."
+  },
+  {
+    "id": 12,
+    "nome": "UPA Norte",
+    "tipo": "hospital",
+    "tipoLabel": "Unidade de Pronto Atendimento",
+    "endereco": "Av. João XXIII, S/N — São Joaquim",
+    "bairro": "São Joaquim",
+    "lat": -5.0545,
+    "lng": -42.7912,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": false,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": false
+    },
+    "descricao": "Unidade de saúde com estrutura de acessibilidade básica. Funciona 24h com atendimento prioritário para PCD."
+  },
+  {
+    "id": 13,
+    "nome": "DETRAN-PI — Sede",
+    "tipo": "servico_publico",
+    "tipoLabel": "Órgão Público Estadual",
+    "endereco": "Av. Pedro Freitas, S/N — São Pedro",
+    "bairro": "São Pedro",
+    "lat": -5.0791,
+    "lng": -42.7901,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": false,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": true
+    },
+    "descricao": "Sede do Departamento de Trânsito com boa estrutura de acessibilidade e atendimento preferencial para PCD."
+  },
+  {
+    "id": 14,
+    "nome": "Parque da Cidadania",
+    "tipo": "espaco_publico",
+    "tipoLabel": "Parque Público",
+    "endereco": "Av. Homero Castelo Branco, S/N — Jóquei",
+    "bairro": "Jóquei",
+    "lat": -5.0723,
+    "lng": -42.7831,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": false,
+      "vagaPCD": true,
+      "elevador": false,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": true
+    },
+    "descricao": "Parque urbano com pistas de caminhada pavimentadas e rampas nos acessos. Banheiros ainda sem adaptação para PCD."
+  },
+  {
+    "id": 15,
+    "nome": "IFPI — Campus Teresina Central",
+    "tipo": "educacao",
+    "tipoLabel": "Instituto Federal",
+    "endereco": "Av. Presidente Jânio Quadros, 330 — Industrial",
+    "bairro": "Industrial",
+    "lat": -5.0834,
+    "lng": -42.7986,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": true,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": true
+    },
+    "descricao": "Campus do IFPI com estrutura completa de acessibilidade. Possui NAPNE (Núcleo de Atendimento às Pessoas com Necessidades Especiais)."
+  },
+  {
+    "id": 16,
+    "nome": "Prefeitura Municipal de Teresina",
+    "tipo": "servico_publico",
+    "tipoLabel": "Prefeitura",
+    "endereco": "Av. Frei Serafim, 814 — Centro",
+    "bairro": "Centro",
+    "lat": -5.0890,
+    "lng": -42.8056,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": true,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": false
+    },
+    "descricao": "Sede da Prefeitura Municipal com estrutura de acessibilidade interna adequada. Calçada da av. principal com pontos irregulares."
+  },
+  {
+    "id": 17,
+    "nome": "Teatro 4 de Setembro",
+    "tipo": "cultura",
+    "tipoLabel": "Teatro",
+    "endereco": "Praça Rio Branco, S/N — Centro",
+    "bairro": "Centro",
+    "lat": -5.0918,
+    "lng": -42.8029,
+    "acessibilidade": {
+      "rampa": false,
+      "banheiroAdaptado": false,
+      "vagaPCD": false,
+      "elevador": false,
+      "entradaAcessivel": false,
+      "calcadaAcessivel": false
+    },
+    "descricao": "Teatro histórico do século XIX sem adaptações de acessibilidade. Patrimônio em processo de restauração aguarda inclusão de recursos acessíveis."
+  },
+  {
+    "id": 18,
+    "nome": "Supermercado Irmãos Gonçalves — Morros",
+    "tipo": "supermercado",
+    "tipoLabel": "Supermercado",
+    "endereco": "Av. Zequinha Freire, S/N — Morros",
+    "bairro": "Morros",
+    "lat": -5.0521,
+    "lng": -42.7875,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": false,
+      "vagaPCD": true,
+      "elevador": false,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": true
+    },
+    "descricao": "Supermercado com rampa de acesso, vagas PCD sinalizadas e caixas prioritários. Banheiro acessível não disponível."
+  },
+  {
+    "id": 19,
+    "nome": "Arena Ytacoatiara (Arena da Cidade)",
+    "tipo": "esporte",
+    "tipoLabel": "Complexo Esportivo",
+    "endereco": "BR 343, Km 3 — Itararé",
+    "bairro": "Itararé",
+    "lat": -5.1102,
+    "lng": -42.7934,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": false,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": false
+    },
+    "descricao": "Arena esportiva com setor exclusivo para PCD nas arquibancadas e banheiros adaptados. Acesso externo com calçadas irregulares."
+  },
+  {
+    "id": 20,
+    "nome": "SESC Teresina",
+    "tipo": "cultura",
+    "tipoLabel": "Centro de Lazer e Cultura",
+    "endereco": "Rua 13 de Maio, 1768 — Vermelha",
+    "bairro": "Vermelha",
+    "lat": -5.0855,
+    "lng": -42.8073,
+    "acessibilidade": {
+      "rampa": true,
+      "banheiroAdaptado": true,
+      "vagaPCD": true,
+      "elevador": true,
+      "entradaAcessivel": true,
+      "calcadaAcessivel": true
+    },
+    "descricao": "SESC com estrutura completa de acessibilidade. Oferece programação cultural inclusiva e atividades adaptadas para PCD."
+  }
+]
