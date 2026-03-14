@@ -1,0 +1,60 @@
+# ── Ambiente virtual Python ───────────────────────────────────
+venv/
+env/
+.venv/
+.env/
+__pypackages__/
+
+# ── VARIÁVEIS DE AMBIENTE — nunca versionar .env real ─────────
+.env
+.env.local
+.env.production
+.env.*.local
+
+# ── Bytecode Python ───────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+
+# ── Distribuição / empacotamento ──────────────────────────────
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ── Testes e cobertura ────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ── Banco de dados local ──────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+
+# ── Logs ──────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Alembic — não versiona migrações geradas automaticamente ──
+# (versiona apenas as criadas manualmente)
+# alembic/versions/
+
+# ── Editores e IDEs ───────────────────────────────────────────
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.sw?
+
+# ── Sistema Operacional ───────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Mypy / type checkers ──────────────────────────────────────
+.mypy_cache/
+.dmypy.json
+dmypy.json
