@@ -1,10 +1,10 @@
-/* =============================================================
+/* --------------------------------------------------------------
    govbr.css — Design System do Governo Federal Brasileiro
    Referência: https://www.gov.br/ds/fundamentos-visuais/cores
    Aplicado ao projeto: Teresina Acessível
-   ============================================================= */
+   -------------------------------------------------------------- */
 
-/* ── 1. TOKENS DE COR ──────────────────────────────────────── */
+/* ── 1. TOKENS DE COR --- */
 :root {
   /* Azul Gov.br */
   --color-primary-default:    #1351B4;
@@ -49,7 +49,7 @@
   --color-accessible-yellow:  #B87900;   /* versão dark para contraste em fundo branco */
   --color-accessible-red:     #E52207;
 
-  /* ── 2. TIPOGRAFIA ─────────────────────────────────────────── */
+  /* ── 2. TIPOGRAFIA ---- */
   --font-family-base:         'Rawline', sans-serif;
   --font-size-xs:             0.75rem;   /* 12px */
   --font-size-sm:             0.875rem;  /* 14px */
@@ -69,7 +69,7 @@
   --line-height-base:         1.5;
   --line-height-relaxed:      1.75;
 
-  /* ── 3. ESPAÇAMENTO (base 4px) ─────────────────────────────── */
+  /* -- 3. ESPAÇAMENTO (base 4px) --- */
   --space-1:  0.25rem;   /* 4px  */
   --space-2:  0.5rem;    /* 8px  */
   --space-3:  0.75rem;   /* 12px */
@@ -81,7 +81,7 @@
   --space-12: 3rem;      /* 48px */
   --space-16: 4rem;      /* 64px */
 
-  /* ── 4. BORDAS E SOMBRAS ───────────────────────────────────── */
+  /* ── 4. BORDAS E SOMBRAS --------- */
   --radius-sm:   4px;
   --radius-md:   8px;
   --radius-lg:   16px;
@@ -90,18 +90,18 @@
   --shadow-md:   0 4px 6px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.08);
   --shadow-lg:   0 10px 25px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.08);
 
-  /* ── 5. TRANSIÇÕES ─────────────────────────────────────────── */
+  /* ── 5. TRANSIÇÕES ---- */
   --transition-fast:   150ms ease;
   --transition-base:   250ms ease;
   --transition-slow:   400ms ease;
 
-  /* ── 6. LAYOUT ─────────────────────────────────────────────── */
+  /* ── 6. LAYOUT ------- */
   --container-max:     1280px;
   --header-height:     72px;
   --sidebar-width:     380px;
 }
 
-/* ── RESET & BASE ──────────────────────────────────────────── */
+/* ── RESET & BASE --------- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -133,7 +133,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── SKIP LINK — WCAG 2.4.1 ───────────────────────────────── */
+/* ── SKIP LINK — WCAG 2.4.1 -------- */
 .skip-link {
   position: absolute;
   top: -100%;
@@ -154,7 +154,7 @@ body {
   outline-offset: 2px;
 }
 
-/* ── FOCO VISÍVEL — WCAG 2.4.7 ────────────────────────────── */
+/* ---- FOCO VISÍVEL — WCAG 2.4.7  */
 /* Garante que TODOS os elementos focáveis tenham indicador claro */
 :focus-visible {
   outline: 3px solid var(--color-border-focus);
@@ -166,7 +166,7 @@ body {
   outline: none;
 }
 
-/* ── TIPOGRAFIA ────────────────────────────────────────────── */
+/* ── TIPOGRAFIA --- */
 h1, h2, h3, h4, h5, h6 {
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
@@ -189,7 +189,7 @@ a {
 }
 a:hover { color: var(--color-primary-dark); }
 
-/* ── BOTÕES GOVBR ──────────────────────────────────────────── */
+/* ── BOTÕES GOVBR ------ */
 .br-button {
   display: inline-flex;
   align-items: center;
@@ -245,7 +245,7 @@ a:hover { color: var(--color-primary-dark); }
   background: var(--color-primary-lightest);
 }
 
-/* ── INPUTS GOVBR ──────────────────────────────────────────── */
+/* ── INPUTS GOVBR ----- */
 .br-input {
   width: 100%;
   padding: var(--space-3) var(--space-4);
@@ -267,7 +267,7 @@ a:hover { color: var(--color-primary-dark); }
   color: var(--color-gray-40);
 }
 
-/* ── CHECKBOX ──────────────────────────────────────────────── */
+/* ── CHECKBOX ---------- */
 .br-checkbox {
   display: flex;
   align-items: center;
@@ -284,7 +284,7 @@ a:hover { color: var(--color-primary-dark); }
   flex-shrink: 0;
 }
 
-/* ── CARDS ─────────────────────────────────────────────────── */
+/* ── CARDS ----------- */
 .br-card {
   background: var(--color-surface);
   border-radius: var(--radius-md);
@@ -296,7 +296,7 @@ a:hover { color: var(--color-primary-dark); }
   box-shadow: var(--shadow-md);
 }
 
-/* ── BADGES DE ACESSIBILIDADE ──────────────────────────────── */
+/* ── BADGES DE ACESSIBILIDADE --------- */
 .badge-acessibilidade {
   display: inline-flex;
   align-items: center;
@@ -323,7 +323,7 @@ a:hover { color: var(--color-primary-dark); }
   border: 1px solid var(--color-accessible-red);
 }
 
-/* ── UTILITÁRIO: SR-ONLY (WCAG) ────────────────────────────── */
+/* ── UTILITÁRIO: SR-ONLY (WCAG) ----------- */
 /* Esconde visualmente mas mantém para leitores de tela */
 .sr-only {
   position: absolute;
@@ -337,7 +337,7 @@ a:hover { color: var(--color-primary-dark); }
   border: 0;
 }
 
-/* ── CONTAINER ─────────────────────────────────────────────── */
+/* ── CONTAINER ----------- */
 .container {
   width: 100%;
   max-width: var(--container-max);
@@ -345,14 +345,14 @@ a:hover { color: var(--color-primary-dark); }
   padding: 0 var(--space-6);
 }
 
-/* ── DIVIDER ───────────────────────────────────────────────── */
+/* ── DIVIDER -------------- */
 .divider {
   border: none;
   border-top: 1px solid var(--color-gray-10);
   margin: var(--space-6) 0;
 }
 
-/* ── LIVE REGION (notificações dinâmicas WCAG 4.1.3) ───────── */
+/* ── LIVE REGION (notificações dinâmicas WCAG 4.1.3) --------- */
 [aria-live] {
   position: absolute;
   left: -9999px;

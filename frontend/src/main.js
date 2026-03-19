@@ -8,6 +8,8 @@ import router from './router/index.js'
 
 // Design System Gov.br — tokens e utilitários globais
 import './assets/govbr.css'
+// Estilos globais dos modos de acessibilidade
+import './assets/accessibility-modes.css'
 
 const app = createApp(App)
 
