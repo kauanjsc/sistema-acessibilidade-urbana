@@ -9,9 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "leaflet": "^1.9.4",
+    "lucide-vue-next": "^0.577.0",
     "vue": "^3.4.0",
-    "vue-router": "^4.3.0",
-    "leaflet": "^1.9.4"
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
