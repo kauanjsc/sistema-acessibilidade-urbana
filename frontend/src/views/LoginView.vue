@@ -167,7 +167,7 @@ import usuariosData from '@/data/usuarios.json'
 const router = useRouter()
 const route  = useRoute()
 
-// ── Estado ────────────────────────────────────────────────────
+//  Estado ---------
 const email       = ref('')
 const senha       = ref('')
 const mostrarSenha = ref(false)
@@ -183,7 +183,7 @@ const usuariosDica = usuariosData.map(u => ({
   avatar: u.avatar
 }))
 
-// ── Validação ─────────────────────────────────────────────────
+//  Validação ------
 function validar() {
   let valido = true
   erros.value = { email: '', senha: '' }
@@ -204,30 +204,33 @@ function validar() {
   return valido
 }
 
-// ── Submissão ─────────────────────────────────────────────────
+// Submissão --------
 async function submeter() {
   erroGeral.value = ''
   if (!validar()) return
 
   carregando.value = true
 
-  // Simula latência de rede
-  await new Promise(r => setTimeout(r, 500))
+  try {
+    // 1. Chama o login real (que agora busca no Render)
+    const resultado = await login(email.value.trim(), senha.value)
 
-  const resultado = login(email.value.trim(), senha.value)
-  carregando.value = false
-
-  if (!resultado.sucesso) {
-    erroGeral.value = resultado.erro
-    return
+    if (resultado.sucesso) {
+      // Se veio de uma página protegida, volta pra lá, senão vai para /contribuir
+      const destino = route.query.redirect || '/contribuir'
+      router.push(destino)
+    } else {
+      // 3.  ERRO: Mostra a mensagem do backend 
+      erroGeral.value = resultado.erro || 'Falha na autenticação.'
+    }
+  } catch (err) {
+    erroGeral.value = 'Erro de conexão com o servidor.'
+  } finally {
+    carregando.value = false
   }
-
-  // Redireciona para a rota original ou para /contribuir
-  const destino = route.query.redirect || '/contribuir'
-  router.push(destino)
 }
 
-// ── Preencher dica ─────────────────────────────────────────────
+//  Preencher dica 
 function preencherDica(u) {
   email.value = u.email
   senha.value = u.senha
@@ -237,7 +240,7 @@ function preencherDica(u) {
 </script>
 
 <style scoped>
-/* ── PÁGINA ──────────────────────────────────────────────────── */
+/*  PÁGINA  */
 .login-page {
   min-height: 100vh;
   background: linear-gradient(145deg, var(--color-primary-darker) 0%, var(--color-primary-dark) 50%, var(--color-primary-default) 100%);
@@ -271,7 +274,7 @@ function preencherDica(u) {
   gap: var(--space-6);
 }
 
-/* ── BRAND ───────────────────────────────────────────────────── */
+/*  BRAND  */
 .login-page__brand {
   display: flex;
   align-items: center;
@@ -291,7 +294,7 @@ function preencherDica(u) {
   margin-bottom: 0;
 }
 
-/* ── CARD ────────────────────────────────────────────────────── */
+/*  CARD  */
 .login-card {
   background: var(--color-white);
   border-radius: var(--radius-lg);
@@ -315,7 +318,7 @@ function preencherDica(u) {
   line-height: var(--line-height-relaxed);
 }
 
-/* ── ALERTA ──────────────────────────────────────────────────── */
+/*  ALERTA  */
 .login-card__alerta {
   display: flex;
   align-items: center;
@@ -330,7 +333,7 @@ function preencherDica(u) {
   color: var(--color-accessible-red);
 }
 
-/* ── FORM ────────────────────────────────────────────────────── */
+/*  FORM  */
 .login-card__form { display: flex; flex-direction: column; gap: var(--space-5); }
 
 .login-campo { display: flex; flex-direction: column; gap: var(--space-2); }
@@ -390,7 +393,7 @@ function preencherDica(u) {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── DICA ────────────────────────────────────────────────────── */
+/*  DICA  */
 .login-card__dica {
   border-top: 1px solid var(--color-gray-10);
   padding-top: var(--space-4);
@@ -472,7 +475,7 @@ function preencherDica(u) {
   margin-top: 2px;
 }
 
-/* ── VOLTAR ──────────────────────────────────────────────────── */
+/*  VOLTAR  */
 .login-page__voltar { text-align: center; }
 .login-page__voltar-link {
   color: rgba(255,255,255,.8);

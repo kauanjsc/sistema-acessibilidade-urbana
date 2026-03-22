@@ -28,8 +28,16 @@
       </div>
     </div>
 
+    <!-- Estado de carregamento -->
+    <div v-if="carregando" class="mapa-view__loading" role="status" aria-live="polite">
+      <span aria-hidden="true">⟳</span> Carregando locais...
+    </div>
+    <div v-if="erroCarregamento" class="mapa-view__erro" role="alert">
+      {{ erroCarregamento }}
+    </div>
+
     <!-- Área principal: filtros + mapa + painel -->
-    <div class="mapa-view__layout">
+    <div v-if="!carregando" class="mapa-view__layout">
 
       <!-- Coluna 1: Filtros ─────────────────────────────── -->
       <!--
@@ -100,9 +108,11 @@ import {
 const route = useRoute()
 
 // ── Estado ────────────────────────────────────────────────────
-const todosLocais = getLocais()
+const todosLocais      = ref([])
+const carregando       = ref(true)
+const erroCarregamento = ref(null)
 const localSelecionado = ref(null)
-const filtrosVisiveis = ref(true)
+const filtrosVisiveis  = ref(true)
 
 // Estado dos filtros
 const busca = ref('')
@@ -112,19 +122,14 @@ const totalFiltrosAtivos = ref(0)
 
 // ── Locais filtrados (computed reativo) ───────────────────────
 const locaisFiltrados = computed(() => {
-  let lista = todosLocais
+  let lista = todosLocais.value
 
-  // 1. Filtro de busca textual
   if (busca.value) {
     lista = filtrarPorBusca(lista, busca.value)
   }
-
-  // 2. Filtro por recursos de acessibilidade
   if (Object.keys(filtrosRecursos.value).length > 0) {
     lista = filtrarPorAcessibilidade(lista, filtrosRecursos.value)
   }
-
-  // 3. Filtro por nível de acessibilidade
   if (filtrosNiveis.value.length > 0) {
     lista = filtrarPorNivel(lista, filtrosNiveis.value)
   }
@@ -148,14 +153,25 @@ function onFiltrosChange({ recursos, niveis }) {
     Object.keys(recursos).length + niveis.length
 }
 
-// ── Query params: abre local diretamente por URL ──────────────
-onMounted(() => {
-  if (route.query.id) {
-    const local = getLocalById(Number(route.query.id))
-    if (local) selecionarLocal(local)
-  }
-  if (route.query.busca) {
-    busca.value = String(route.query.busca)
+// ── Carrega locais e trata query params ───────────────────────
+onMounted(async () => {
+  try {
+    carregando.value = true
+    todosLocais.value = await getLocais()
+
+    // Abre local diretamente por URL (?id=4)
+    if (route.query.id) {
+      const local = todosLocais.value.find(l => l.id === Number(route.query.id))
+      if (local) selecionarLocal(local)
+    }
+    if (route.query.busca) {
+      busca.value = String(route.query.busca)
+    }
+  } catch (err) {
+    erroCarregamento.value = 'Não foi possível carregar os locais. Tente novamente.'
+    console.error('[MapaView] erro ao carregar locais:', err)
+  } finally {
+    carregando.value = false
   }
 })
 </script>
@@ -269,5 +285,31 @@ onMounted(() => {
   .mapa-view__mapa {
     min-height: 400px;
   }
+}
+
+.mapa-view__loading {
+  padding: var(--space-8);
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+.mapa-view__loading span {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.mapa-view__erro {
+  margin: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-danger-light);
+  color: var(--color-accessible-red);
+  border-left: 4px solid var(--color-accessible-red);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
 }
 </style>

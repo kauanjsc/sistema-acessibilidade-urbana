@@ -35,7 +35,7 @@
 
           <div class="hero__acoes">
             <RouterLink to="/mapa" class="br-button primary hero__cta">
-              <span aria-hidden="true">🗺️</span>
+              <component :is="lucideIcons.Map" :size="20" aria-hidden="true" style="margin-right: 8px" />
               Explorar o Mapa
             </RouterLink>
             <a href="#sobre" class="br-button secondary">
@@ -71,7 +71,9 @@
 
         <ol class="passos" role="list">
           <li v-for="passo in passos" :key="passo.numero" class="passo">
-            <span class="passo__numero" aria-hidden="true">{{ passo.numero }}</span>
+            <div class="passo__numero" aria-hidden="true">
+              <component :is="lucideIcons[passo.icone]" :size="20" />
+            </div>
             <div>
               <h3 class="passo__titulo">{{ passo.titulo }}</h3>
               <p class="passo__desc">{{ passo.desc }}</p>
@@ -90,15 +92,24 @@
         </p>
 
         <div class="classif-cards">
-          <div
-            v-for="nivel in niveisInfo"
-            :key="nivel.chave"
-            class="classif-card"
+          <div 
+            v-for="nivel in niveisInfo" 
+            :key="nivel.chave" 
+            class="classif-card" 
             :class="`classif-card--${nivel.chave}`"
           >
-            <span class="classif-card__icone" aria-hidden="true">{{ nivel.icone }}</span>
+            <component
+              :is="lucideIcons[nivel.icone]"
+              :size="44"
+              :stroke-width="1.5"
+              class="classif-card__icone-lucide"
+              :class="`text-${nivel.chave}`"
+              aria-hidden="true"
+            />
+            
             <h3 class="classif-card__titulo">{{ nivel.label }}</h3>
             <p class="classif-card__desc">{{ nivel.desc }}</p>
+            
             <BadgeAcessibilidade
               :nivel="nivel.chave"
               :label="nivel.label"
@@ -108,7 +119,7 @@
       </div>
     </section>
 
-    <!-- ─── RECURSOS MAPEADOS ─────────────────────────────── -->
+    <!--  RECURSOS MAPEADOS  -->
     <section class="recursos-section" aria-labelledby="recursos-heading">
       <div class="container">
         <h2 id="recursos-heading" class="section-titulo">Recursos Mapeados</h2>
@@ -117,12 +128,14 @@
         </p>
 
         <ul class="recursos-grid" role="list">
-          <li
-            v-for="(meta, chave) in RECURSOS_META"
-            :key="chave"
-            class="recurso-card"
-          >
-            <span class="recurso-card__icone" aria-hidden="true">{{ meta.icone }}</span>
+          <li v-for="(meta, chave) in RECURSOS_META" :key="chave" class="recurso-card">
+            <component
+              :is="lucideIcons[meta.icone]"
+              :size="28"
+              stroke-width="1.5"
+              class="recurso-card__icone-lucide"
+              aria-hidden="true"
+            />
             <h3 class="recurso-card__label">{{ meta.label }}</h3>
             <p class="recurso-card__desc">{{ meta.descricao }}</p>
           </li>
@@ -130,7 +143,7 @@
       </div>
     </section>
 
-    <!-- ─── CTA MAPA ──────────────────────────────────────── -->
+    <!-- ---- CTA MAPA ----- -->
     <section class="cta-section" aria-labelledby="cta-heading">
       <div class="container cta-inner">
         <div>
@@ -142,7 +155,13 @@
           </p>
         </div>
         <RouterLink to="/mapa" class="br-button primary cta-btn">
-          <span aria-hidden="true">🗺️</span> Acessar o Mapa
+          <component
+            :is="lucideIcons.Map"
+            :size="20"
+            aria-hidden="true"
+            style="margin-right: 8px"
+          />
+          Ir para o Mapa
         </RouterLink>
       </div>
     </section>
@@ -151,72 +170,85 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import BuscaLocal from '@/components/BuscaLocal.vue'
+import * as lucideIcons from 'lucide-vue-next'
 import BadgeAcessibilidade from '@/components/BadgeAcessibilidade.vue'
 import { getLocais, RECURSOS_META, classificarAcessibilidade } from '@/services/acessibilidadeService.js'
 
 const router = useRouter()
-const todosLocais = getLocais()
-const totalLocais = todosLocais.length
+const todosLocais = ref([])
 
-// ── Estatísticas ─────────────────────────────────────────────
+onMounted(async () => {
+  try {
+    todosLocais.value = await getLocais()
+  } catch (err) {
+    console.error('[HomeView] erro ao carregar locais:', err)
+  }
+})
+
+const totalLocais = computed(() => todosLocais.value.length)
+
+// ── Estatísticas 
 const totalAcessiveis = computed(() =>
-  todosLocais.filter(l => l.classificacao.nivel === 'total').length
+  todosLocais.value.filter(l => classificarAcessibilidade(l) === 'alto').length
 )
 const totalParciais = computed(() =>
-  todosLocais.filter(l => l.classificacao.nivel === 'parcial').length
+  todosLocais.value.filter(l => classificarAcessibilidade(l) === 'medio').length
 )
 
 const estatisticas = computed(() => [
-  { valor: totalLocais, label: 'Locais Mapeados', cor: 'var(--color-primary-default)' },
+  { valor: totalLocais.value, label: 'Locais Mapeados', cor: 'var(--color-primary-default)' },
   { valor: totalAcessiveis.value, label: 'Totalmente Acessíveis', cor: 'var(--color-accessible-green)' },
   { valor: totalParciais.value, label: 'Parcialmente Acessíveis', cor: 'var(--color-warning-dark)' }
 ])
 
-// ── Passos ───────────────────────────────────────────────────
+//  Passos ------
 const passos = [
   {
     numero: '1',
+    icone: 'Search',
     titulo: 'Busque ou navegue pelo mapa',
     desc: 'Use o campo de busca para encontrar um local específico ou explore o mapa interativo de Teresina.'
   },
   {
     numero: '2',
+    icone: 'Filter',
     titulo: 'Aplique filtros de acessibilidade',
     desc: 'Filtre os locais pelos recursos que você precisa: rampa, banheiro adaptado, vaga PCD e mais.'
   },
   {
     numero: '3',
+    icone: 'Info',
     titulo: 'Veja os detalhes completos',
     desc: 'Clique em um marcador para ver todos os recursos de acessibilidade disponíveis no local.'
   }
 ]
 
-// ── Níveis ───────────────────────────────────────────────────
+// ── Níveis ---------
 const niveisInfo = [
   {
     chave: 'total',
-    icone: '✅',
+    icone: 'CheckCircle2',
     label: 'Totalmente Acessível',
     desc: 'Possui 5 ou 6 dos recursos de acessibilidade verificados.'
   },
   {
     chave: 'parcial',
-    icone: '⚠️',
+    icone: 'AlertCircle',
     label: 'Parcialmente Acessível',
     desc: 'Possui de 2 a 4 recursos de acessibilidade disponíveis.'
   },
   {
     chave: 'nao',
-    icone: '❌',
+    icone: 'XCircle',
     label: 'Não Acessível',
     desc: 'Possui 0 ou 1 recurso de acessibilidade disponível.'
   }
 ]
 
-// ── Navegação ─────────────────────────────────────────────────
+// ── Navegação -------------
 function irParaMapa(local) {
   router.push({ name: 'mapa', query: { id: local.id } })
 }
@@ -227,7 +259,20 @@ function buscarNoMapa(query) {
 </script>
 
 <style scoped>
-/* ── HERO ────────────────────────────────────────────────── */
+/* Cores dos ícones de classificação */
+.text-total { color: var(--color-accessible-green); }
+.text-parcial { color: var(--color-warning-dark); }
+.text-nao { color: var(--color-accessible-red); }
+
+.classif-card__icone-lucide {
+  margin-bottom: var(--space-2);
+}
+
+.recurso-card__icone-lucide {
+  color: var(--color-primary-default);
+  margin-bottom: var(--space-2);
+}
+
 .hero {
   background: linear-gradient(135deg, var(--color-primary-darker) 0%, var(--color-primary-default) 60%, var(--color-primary-light) 100%);
   color: var(--color-white);
@@ -313,7 +358,7 @@ function buscarNoMapa(query) {
   font-weight: var(--font-weight-medium);
 }
 
-/* ── SEÇÕES ──────────────────────────────────────────────── */
+/* ── SEÇÕES ------- */
 .section-titulo {
   font-size: var(--font-size-2xl);
   color: var(--color-primary-dark);
@@ -345,7 +390,7 @@ function buscarNoMapa(query) {
 .passo__titulo { font-size: var(--font-size-md); font-weight: var(--font-weight-bold); margin-bottom: var(--space-1); }
 .passo__desc { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: 0; }
 
-/* ── CLASSIFICAÇÃO ───────────────────────────────────────── */
+/* ── CLASSIFICAÇÃO ----------- */
 .classificacao-section { padding: var(--space-12) 0; background: var(--color-gray-05); }
 .classif-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
 .classif-card {
@@ -363,7 +408,7 @@ function buscarNoMapa(query) {
 .classif-card__titulo { font-size: var(--font-size-md); font-weight: var(--font-weight-bold); }
 .classif-card__desc { font-size: var(--font-size-sm); color: var(--color-text-secondary); flex: 1; margin-bottom: 0; }
 
-/* ── RECURSOS ────────────────────────────────────────────── */
+/* ── RECURSOS ------------ */
 .recursos-section { padding: var(--space-12) 0; background: var(--color-surface); }
 .recursos-grid {
   list-style: none;
@@ -384,7 +429,7 @@ function buscarNoMapa(query) {
 .recurso-card__label { font-size: var(--font-size-sm); font-weight: var(--font-weight-bold); }
 .recurso-card__desc { font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-bottom: 0; }
 
-/* ── CTA ─────────────────────────────────────────────────── */
+/* --- CTA -------------- */
 .cta-section {
   padding: var(--space-12) 0;
   background: var(--color-primary-darker);
@@ -410,7 +455,7 @@ function buscarNoMapa(query) {
   white-space: nowrap;
 }
 
-/* ── RESPONSIVO ──────────────────────────────────────────── */
+/* --- RESPONSIVO ----- */
 @media (max-width: 900px) {
   .hero__inner { grid-template-columns: 1fr; }
   .hero__stats { flex-direction: row; justify-content: center; }
