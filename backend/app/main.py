@@ -18,7 +18,7 @@ settings = get_settings()
 # ── Cria tabelas no banco (em produção use Alembic) ───────────
 Base.metadata.create_all(bind=engine)
 
-# ── Aplicação ─────────────────────────────────────────────────
+# ── Aplicação ---
 app = FastAPI(
     title="Teresina Acessível — API",
     description="""
@@ -42,22 +42,28 @@ Desenvolvido em **Vue 3 + Vite + Leaflet**.
     license_info={"name": "MIT"},
 )
 
-# ── CORS ───────────────────
+# ---  CORS -----
+origens_permitidas = [
+    "http://localhost:5173", 
+    "http://localhost:3000",
+    "https://sistema-acessibilidade-urbana.vercel.app" # rota de prod
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.origins_list,
+    allow_origins=origens_permitidas,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"], # Libera POST, GET, PUT, DELETE para todas as rotas
+    allow_headers=["*"], # Libera mandar o Token em todas as rotas
 )
 
-# ── Routers ───────────────────────────────────────────────────
+# ── Routers --------------------------------------
 app.include_router(auth.router)
 app.include_router(locais.router)
 app.include_router(avaliacoes.router)
 
 
-# ── Health check ──────────────────────────────────────────────
+# ── Health check ---------------------------
 @app.get("/", tags=["Health"], summary="Health check")
 def root():
     return {
