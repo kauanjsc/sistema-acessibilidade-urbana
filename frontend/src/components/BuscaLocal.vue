@@ -129,7 +129,7 @@ const query = ref('')
 const isFocused = ref(false)
 const activeSugestaoIndex = ref(-1)
 
-const todosLocais = getLocais()
+const todosLocais = ref([])
 
 /** Sugestões filtradas com base no query atual */
 const sugestoes = computed(() => {

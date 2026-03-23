@@ -7,7 +7,8 @@
 
     <div class="filtro-panel__header">
       <h2 class="filtro-panel__title" id="filtro-heading">
-        <span aria-hidden="true">🔎</span> Filtros
+        <component :is="lucideIcons.Search" :size="20" aria-hidden="true" style="margin-right: 8px; vertical-align: middle;" />
+        Filtros
       </h2>
 
       <!-- Contador de filtros ativos -->
@@ -48,7 +49,13 @@
             @change="emitirFiltros"
           />
           <span class="filtro-panel__item-label">
-            <span aria-hidden="true">{{ recurso.icone }}</span>
+            <component
+              :is="lucideIcons[recurso.icone]"
+              :size="16"
+              stroke-width="2"
+              aria-hidden="true"
+              class="icone-recurso"
+            />
             {{ recurso.label }}
           </span>
           <!-- Descrição extra para leitores de tela (WCAG 1.3.3) -->
@@ -109,6 +116,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { RECURSOS_META } from '@/services/acessibilidadeService.js'
+import * as lucideIcons from 'lucide-vue-next'
 
 const emit = defineEmits(['change'])
 
@@ -166,6 +174,14 @@ function limparFiltros() {
 </script>
 
 <style scoped>
+.icone-recurso {
+  color: var(--color-primary-default);
+  flex-shrink: 0;
+}
+
+.br-checkbox input + .filtro-panel__item-label {
+  margin-left: var(--space-1);
+}
 .filtro-panel {
   background: var(--color-surface);
   border: 1px solid var(--color-gray-10);
