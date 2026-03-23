@@ -212,7 +212,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import BuscaLocal from '@/components/BuscaLocal.vue'
 import BadgeAcessibilidade from '@/components/BadgeAcessibilidade.vue'
@@ -228,20 +228,21 @@ import { totalAvaliacoes } from '@/services/avaliacoesService.js'
 const route = useRoute()
 
 // ── Dados ─────────────────────────────────────────────────────
-const todosLocais    = getLocais()
-const limiteLista    = 8
-const busca          = ref('')
-const tipoFiltro     = ref('')
+const todosLocais      = ref([])
+const carregando       = ref(true)
+const limiteLista      = 8
+const busca            = ref('')
+const tipoFiltro       = ref('')
 const localSelecionado = ref(null)
-const verTodosLocais = ref(false)
-const listaRef       = ref(null)
+const verTodosLocais   = ref(false)
+const listaRef         = ref(null)
 
-const totalLocais = todosLocais.length
+const totalLocais        = computed(() => todosLocais.value.length)
 const totalContribuicoes = totalAvaliacoes
 
 // ── Filtros ───────────────────────────────────────────────────
 const locaisFiltrados = computed(() => {
-  let lista = todosLocais
+  let lista = todosLocais.value
   if (busca.value) lista = filtrarPorBusca(lista, busca.value)
   if (tipoFiltro.value) lista = lista.filter(l => l.tipo === tipoFiltro.value)
   return lista
@@ -251,11 +252,22 @@ const locaisVisiveis = computed(() =>
   verTodosLocais.value ? locaisFiltrados.value : locaisFiltrados.value.slice(0, limiteLista)
 )
 
-// ── Pré-seleção via query param (?id=4) ───────────────────────
-if (route.query.id) {
-  const local = todosLocais.find(l => l.id === Number(route.query.id))
-  if (local) localSelecionado.value = local
-}
+// ── Carrega locais e trata pré-seleção via query param ────────
+onMounted(async () => {
+  try {
+    carregando.value = true
+    todosLocais.value = await getLocais()
+
+    if (route.query.id) {
+      const local = todosLocais.value.find(l => l.id === Number(route.query.id))
+      if (local) localSelecionado.value = local
+    }
+  } catch (err) {
+    console.error('[ContribuirView] erro ao carregar locais:', err)
+  } finally {
+    carregando.value = false
+  }
+})
 
 // ── Handlers ─────────────────────────────────────────────────
 function selecionarLocal(local) {
