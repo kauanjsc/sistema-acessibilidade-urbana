@@ -10,7 +10,7 @@
     role="img"
     :aria-label="`Nível de acessibilidade: ${label}`"
   >
-    <span aria-hidden="true">{{ icone }}</span>
+    <component :is="icone" aria-hidden="true" :size="16" style="margin-right: 4px; vertical-align: text-bottom;" />
     <span>{{ label }}</span>
     <span v-if="mostrarScore" class="badge-score" aria-hidden="true">
       {{ score }}/{{ total }}
@@ -20,6 +20,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { CheckCircle, TriangleAlert, XCircle, HelpCircle } from 'lucide-vue-next'
 
 const props = defineProps({
   /** 'total' | 'parcial' | 'nao' */
@@ -49,11 +50,11 @@ const props = defineProps({
 
 const icone = computed(() => {
   const icones = {
-    total:   '✅',
-    parcial: '⚠️',
-    nao:     '❌'
+    total: CheckCircle,
+    parcial: TriangleAlert,
+    nao:     XCircle
   }
-  return icones[props.nivel] ?? '❓'
+  return icones[props.nivel] || HelpCircle
 })
 </script>
 

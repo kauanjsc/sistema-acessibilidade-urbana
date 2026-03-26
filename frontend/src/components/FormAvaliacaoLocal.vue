@@ -9,7 +9,7 @@
   >
     <div class="form-avaliacao__header">
       <h2 id="form-avaliacao-titulo" class="form-avaliacao__titulo">
-        <span aria-hidden="true">✍️</span>
+        <Pencil aria-hidden="true" :size="20" />
         Registrar Avaliação
       </h2>
       <p class="form-avaliacao__subtitulo">
@@ -31,7 +31,7 @@
 
       <!-- ── 1. LOCAL SELECIONADO (readonly) ─────────────── -->
       <div v-if="local" class="form-avaliacao__local-info" role="group" aria-label="Local selecionado">
-        <span class="form-avaliacao__local-tag" aria-hidden="true">📍</span>
+        <MapPin class="form-avaliacao__local-tag" aria-hidden="true" :size="20" />
         <div>
           <p class="form-avaliacao__local-nome">{{ local.nome }}</p>
           <p class="form-avaliacao__local-end">{{ local.endereco }} — {{ local.bairro }}</p>
@@ -66,7 +66,7 @@
               aria-describedby="radio-sim-desc"
               @change="erros.acessivel = ''"
             />
-            <span class="form-avaliacao__radio-icon" aria-hidden="true">✅</span>
+            <CheckCircle class="form-avaliacao__radio-icon" aria-hidden="true" :size="20" style="color: var(--color-accessible-green);" />
             <span class="form-avaliacao__radio-texto">
               Sim, é acessível
             </span>
@@ -90,7 +90,7 @@
               aria-describedby="radio-nao-desc"
               @change="erros.acessivel = ''"
             />
-            <span class="form-avaliacao__radio-icon" aria-hidden="true">❌</span>
+            <XCircle class="form-avaliacao__radio-icon" aria-hidden="true" :size="20" style="color: var(--color-accessible-red);" />
             <span class="form-avaliacao__radio-texto">
               Não, há barreiras
             </span>
@@ -109,7 +109,8 @@
           class="form-avaliacao__erro"
           aria-live="polite"
         >
-          <span aria-hidden="true">⚠</span> {{ erros.acessivel }}
+          <TriangleAlert aria-hidden="true" :size="16" />
+           {{ erros.acessivel }}
         </p>
       </fieldset>
 
@@ -166,7 +167,7 @@
 
       <!-- ── 4. USUÁRIO AUTENTICADO ─────────────────────────── -->
       <div class="form-avaliacao__usuario-info" aria-label="Enviando como">
-        <span aria-hidden="true">👤</span>
+        <User aria-hidden="true" :size="20" />
         <div>
           <p class="form-avaliacao__usuario-label">Enviando como</p>
           <p class="form-avaliacao__usuario-nome">{{ nomeAutor }}</p>
@@ -183,8 +184,8 @@
           aria-describedby="submit-desc"
           @click="submeter"
         >
-          <span v-if="enviando" aria-hidden="true" class="form-avaliacao__spinner">⟳</span>
-          <span aria-hidden="true" v-else>📨</span>
+          <Loader2 v-if="enviando" aria-hidden="true" class="form-avaliacao__spinner" :size="20" style="margin-right: 6px;" />
+          <Send v-else aria-hidden="true" :size="20" style="margin-right: 6px;" />
           {{ enviando ? 'Enviando...' : 'Enviar contribuição' }}
         </button>
         <span id="submit-desc" class="sr-only">
@@ -208,7 +209,7 @@
         aria-live="assertive"
         class="form-avaliacao__sucesso"
       >
-        <span aria-hidden="true" class="form-avaliacao__sucesso-icone">🎉</span>
+        <PartyPopper aria-hidden="true" class="form-avaliacao__sucesso-icone" :size="24" />
         <div>
           <p class="form-avaliacao__sucesso-titulo">Contribuição enviada!</p>
           <p class="form-avaliacao__sucesso-msg">
@@ -225,6 +226,7 @@
 import { ref, reactive, computed } from 'vue'
 import { enviarAvaliacao } from '@/services/avaliacoesService.js'
 import { useAuth } from '@/services/authService.js'
+import { Pencil, MapPin, CheckCircle, XCircle, TriangleAlert, User, Loader2, Send, PartyPopper } from 'lucide-vue-next'
 
 const props = defineProps({
   local: { type: Object, default: null }

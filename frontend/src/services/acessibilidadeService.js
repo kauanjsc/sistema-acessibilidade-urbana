@@ -7,6 +7,11 @@
 
 import { api } from './apiClient.js'
 import locaisData from '@/data/locais.json'
+import { 
+  ShoppingBag, Hospital, GraduationCap, TreePine, Building2, Landmark, 
+  Store, Theater, BusFront, ShoppingCart, Trophy,
+  Accessibility, Users, CircleParking, ArrowUpCircle, DoorOpen, Footprints
+} from 'lucide-vue-next'
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
 

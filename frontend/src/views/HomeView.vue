@@ -11,7 +11,7 @@
 
         <div class="hero__content">
           <p class="hero__pretitulo" aria-hidden="true">
-            Prefeitura de Teresina — PI
+            Trabalho de Conclusão de Curso — Ciência da Computação
           </p>
           <h1 id="hero-heading" class="hero__titulo">
             Teresina<br />
@@ -38,7 +38,7 @@
               <component :is="lucideIcons.Map" :size="20" aria-hidden="true" style="margin-right: 8px" />
               Explorar o Mapa
             </RouterLink>
-            <a href="#sobre" class="br-button secondary">
+            <a href="#sobre" class="br-button secondary hero__cta-secondary">
               Saiba Mais
             </a>
           </div>
@@ -318,6 +318,16 @@ function buscarNoMapa(query) {
   gap: var(--space-3);
   flex-wrap: wrap;
 }
+
+.hero__cta-secondary {
+  color: var(--color-white) !important;
+  border-color: var(--color-white) !important;
+  background: transparent !important;
+}
+.hero__cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
 .hero__cta {
   background: var(--color-warning) !important;
   border-color: var(--color-warning) !important;

@@ -11,7 +11,7 @@
 
         <!-- Logo / identidade -->
         <div class="login-page__brand" aria-label="Teresina Acessível">
-          <span class="login-page__brand-icon" aria-hidden="true">♿</span>
+          <Accessibility class="login-page__brand-icon" aria-hidden="true" :size="40" />
           <div>
             <p class="login-page__brand-name">Teresina Acessível</p>
             <p class="login-page__brand-sub">Mapeamento de Acessibilidade Urbana</p>
@@ -35,7 +35,7 @@
             aria-live="assertive"
             class="login-card__alerta"
           >
-            <span aria-hidden="true">⚠</span>
+            <TriangleAlert aria-hidden="true" :size="20" />
             {{ erroGeral }}
           </div>
 
@@ -94,7 +94,7 @@
                   :aria-label="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'"
                   @click="mostrarSenha = !mostrarSenha"
                 >
-                  {{ mostrarSenha ? '🙈' : '👁️' }}
+                  <EyeOff v-if="mostrarSenha" :size="20" /><Eye v-else :size="20" />
                 </button>
               </div>
               <p v-if="erros.senha" id="erro-senha" role="alert" class="login-campo__erro">
@@ -110,8 +110,8 @@
               :aria-busy="carregando"
               @click="submeter"
             >
-              <span v-if="carregando" class="login-card__spinner" aria-hidden="true">⟳</span>
-              <span aria-hidden="true" v-else>🔓</span>
+              <Loader2 v-if="carregando" class="login-card__spinner" aria-hidden="true" :size="20" />
+              <LogIn v-else aria-hidden="true" :size="20" />
               {{ carregando ? 'Entrando...' : 'Entrar' }}
             </button>
 
@@ -120,7 +120,7 @@
           <!-- Dica de acesso (apenas em dev/protótipo) -->
           <details class="login-card__dica">
             <summary class="login-card__dica-summary">
-              <span aria-hidden="true">💡</span> Ver credenciais de teste
+              <Lightbulb aria-hidden="true" :size="18" /> Ver credenciais de teste
             </summary>
             <div class="login-card__dica-corpo">
               <p class="login-card__dica-titulo">Usuários disponíveis no protótipo:</p>
@@ -148,7 +148,7 @@
         <!-- Link voltar -->
         <div class="login-page__voltar">
           <RouterLink to="/" class="login-page__voltar-link">
-            ← Voltar para o início sem entrar
+            <ArrowLeft :size="16" style="display: inline; vertical-align: middle; margin-right: 4px;" /> Voltar para o início sem entrar
           </RouterLink>
         </div>
 
@@ -161,6 +161,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { Accessibility, TriangleAlert, Eye, EyeOff, Loader2, LogIn, Lightbulb, ArrowLeft } from 'lucide-vue-next'
 import { login } from '@/services/authService.js'
 import usuariosData from '@/data/usuarios.json'
 

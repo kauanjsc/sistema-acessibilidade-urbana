@@ -5,12 +5,8 @@
     <div class="govbr-bar" role="complementary" aria-label="Barra do Governo Federal">
       <div class="container govbr-bar__inner">
         <span class="govbr-bar__logo" aria-hidden="true">
-          <svg width="48" height="20" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-            <rect width="120" height="40" fill="#1351B4"/>
-            <text x="8" y="28" fill="white" font-size="20" font-family="Rawline,sans-serif" font-weight="700">gov.br</text>
-          </svg>
         </span>
-        <span class="govbr-bar__text">Governo Federal — Brasil</span>
+        <span class="govbr-bar__text">Dados simulados para fins acadêmicos. Teresina, PI. @kauanjsc</span>
       </div>
     </div>
 
@@ -20,7 +16,7 @@
 
         <!-- Logo -->
         <RouterLink to="/" class="app-header__brand" :aria-label="`Teresina Acessível — ir para a página inicial`">
-          <span class="app-header__brand-icon" aria-hidden="true">♿</span>
+          <Accessibility class="app-header__brand-icon" aria-hidden="true" :size="28" />
           <span class="app-header__brand-text">
             <span class="app-header__brand-name">Teresina</span>
             <span class="app-header__brand-tagline">Acessível</span>
@@ -42,7 +38,7 @@
             </li>
             <li>
               <RouterLink to="/contribuir" class="app-header__nav-link app-header__nav-link--destaque" :aria-current="$route.name === 'contribuir' ? 'page' : undefined">
-                ✍️ Contribuir
+                <Pencil :size="16" style="display: inline; vertical-align: text-bottom; margin-right: 4px;" /> Contribuir
               </RouterLink>
             </li>
           </ul>
@@ -66,7 +62,7 @@
               title="Sair"
               @click="fazerLogout"
             >
-              <span aria-hidden="true">🚪</span>
+              <LogOut aria-hidden="true" :size="16" />
               <span class="app-header__btn-logout-texto">Sair</span>
             </button>
           </div>
@@ -78,7 +74,7 @@
             class="app-header__btn-login"
             aria-label="Entrar na plataforma"
           >
-            🔓 Entrar
+            <LogIn :size="18" style="display: inline; vertical-align: text-bottom; margin-right: 4px;" /> Entrar
           </RouterLink>
 
         </div>
@@ -91,7 +87,8 @@
           aria-label="Abrir menu de navegação"
           @click="toggleMobileMenu"
         >
-          <span aria-hidden="true">{{ mobileMenuOpen ? '✕' : '☰' }}</span>
+          <X v-if="mobileMenuOpen" aria-hidden="true" :size="24" />
+          <Menu v-else aria-hidden="true" :size="24" />
         </button>
 
       </div>
@@ -110,17 +107,17 @@
         <ul role="list">
           <li>
             <RouterLink to="/" class="app-header__mobile-link" :aria-current="$route.name === 'home' ? 'page' : undefined" @click="closeMobileMenu">
-              🏠 Início
+              <Home :size="18" style="display: inline; vertical-align: text-bottom; margin-right: 8px;" /> Início
             </RouterLink>
           </li>
           <li>
             <RouterLink to="/mapa" class="app-header__mobile-link" :aria-current="$route.name === 'mapa' ? 'page' : undefined" @click="closeMobileMenu">
-              🗺️ Mapa Interativo
+              <Map :size="18" style="display: inline; vertical-align: text-bottom; margin-right: 8px;" /> Mapa Interativo
             </RouterLink>
           </li>
           <li>
             <RouterLink to="/contribuir" class="app-header__mobile-link app-header__mobile-link--destaque" :aria-current="$route.name === 'contribuir' ? 'page' : undefined" @click="closeMobileMenu">
-              ✍️ Contribuir
+              <Pencil :size="18" style="display: inline; vertical-align: text-bottom; margin-right: 8px;" /> Contribuir
             </RouterLink>
           </li>
         </ul>
@@ -135,11 +132,11 @@
             <p class="app-header__mobile-user-email">{{ usuarioAtual.email }}</p>
           </div>
           <button type="button" class="br-button secondary app-header__mobile-logout" @click="fazerLogout">
-            🚪 Sair
+            <LogOut :size="18" style="display: inline; vertical-align: text-bottom; margin-right: 4px;" /> Sair
           </button>
         </div>
         <RouterLink v-else to="/login" class="br-button primary app-header__mobile-login" @click="closeMobileMenu">
-          🔓 Entrar na plataforma
+          <LogIn :size="18" style="display: inline; vertical-align: text-bottom; margin-right: 4px;" /> Entrar na plataforma
         </RouterLink>
       </div>
     </div>
@@ -150,6 +147,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { Accessibility, Pencil, LogOut, LogIn, Menu, X, Home, Map } from 'lucide-vue-next'
 import { useAuth } from '@/services/authService.js'
 
 const route  = useRoute()

@@ -17,7 +17,7 @@
 
       <div class="busca-local__input-wrapper">
         <!-- Ícone decorativo — aria-hidden pois o label já descreve (WCAG 1.1.1) -->
-        <span class="busca-local__icon" aria-hidden="true">🔍</span>
+        <Search class="busca-local__icon" aria-hidden="true" :size="20" style="color: var(--color-gray-60);" />
 
         <input
           :id="inputId"
@@ -110,6 +110,7 @@
 import { ref, computed, watch } from 'vue'
 import { filtrarPorBusca } from '@/services/acessibilidadeService.js'
 import { getLocais } from '@/services/acessibilidadeService.js'
+import { Search, X } from 'lucide-vue-next'
 
 const props = defineProps({
   label: { type: String, default: 'Buscar local em Teresina' },
@@ -230,7 +231,7 @@ defineExpose({ focus: () => inputRef.value?.focus() })
   display: block;
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-sm);
-  color: var(--color-text-primary);
+  color: var(--color-text-white);
   margin-bottom: var(--space-2);
 }
 

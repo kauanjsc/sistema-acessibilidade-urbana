@@ -71,8 +71,8 @@
               aria-label="Filtrar locais por tipo de estabelecimento"
             >
               <option value="">Todos os tipos</option>
-              <option v-for="(label, key) in TIPOS_META" :key="key" :value="key">
-                {{ label }}
+              <option v-for="(meta, key) in TIPOS_META" :key="key" :value="key">
+                {{ meta.label }}
               </option>
             </select>
           </div>
@@ -107,7 +107,8 @@
                     <p class="contribuir-local-card__tipo">{{ local.tipoLabel }}</p>
                     <p class="contribuir-local-card__nome">{{ local.nome }}</p>
                     <p class="contribuir-local-card__end">
-                      <span aria-hidden="true">📍</span> {{ local.bairro }}
+                      <MapPin aria-hidden="true" :size="14" style="margin-right: 4px;" />
+                       {{ local.bairro }}
                     </p>
                   </div>
                   <BadgeAcessibilidade
@@ -162,7 +163,7 @@
           role="status"
           aria-live="polite"
         >
-          <span aria-hidden="true">👆</span>
+          <MousePointerClick aria-hidden="true" :size="20" />
           Selecione um local no passo 1 para habilitar a avaliação.
         </div>
 
@@ -198,7 +199,7 @@
 
         <ol class="contribuir-passos-info" role="list">
           <li v-for="info in comoFunciona" :key="info.numero" class="contribuir-passo-info">
-            <span class="contribuir-passo-info__num" aria-hidden="true">{{ info.icone }}</span>
+            <component :is="info.icone" class="contribuir-passo-info__num" aria-hidden="true" :size="28" />
             <div>
               <h3 class="contribuir-passo-info__titulo">{{ info.titulo }}</h3>
               <p class="contribuir-passo-info__desc">{{ info.desc }}</p>
@@ -218,6 +219,7 @@ import BuscaLocal from '@/components/BuscaLocal.vue'
 import BadgeAcessibilidade from '@/components/BadgeAcessibilidade.vue'
 import FormAvaliacaoLocal from '@/components/FormAvaliacaoLocal.vue'
 import ListaComentarios from '@/components/ListaComentarios.vue'
+import { MapPin, MousePointerClick, Search, Pencil, Send, Map as MapIcon } from 'lucide-vue-next'
 import {
   getLocais,
   filtrarPorBusca,
@@ -292,25 +294,25 @@ function onAvaliacaoEnviada(avaliacao) {
 const comoFunciona = [
   {
     numero: 1,
-    icone: '🔍',
+    icone: Search,
     titulo: 'Encontre o local',
     desc: 'Busque pelo nome do local, bairro ou filtre pelo tipo de estabelecimento.'
   },
   {
     numero: 2,
-    icone: '✍️',
+    icone: Pencil,
     titulo: 'Avalie a acessibilidade',
     desc: 'Informe se o local é acessível e descreva o que você observou: rampas, banheiros, calçadas, etc.'
   },
   {
     numero: 3,
-    icone: '📤',
+    icone: Send,
     titulo: 'Envie sua contribuição',
     desc: 'Sua avaliação fica disponível para todos que consultarem o local no mapa.'
   },
   {
     numero: 4,
-    icone: '🗺️',
+    icone: MapIcon,
     titulo: 'Impacto no mapa',
     desc: 'O índice cidadão de cada local é calculado com base nas contribuições da comunidade.'
   }

@@ -4,7 +4,7 @@
     <!-- Cabeçalho -->
     <div class="lista-comentarios__header">
       <h3 id="lista-comentarios-titulo" class="lista-comentarios__titulo">
-        <span aria-hidden="true">💬</span>
+        <MessageSquare aria-hidden="true" :size="24" style="margin-right: 8px; vertical-align: text-bottom;" />
         Avaliações da Comunidade
         <span v-if="comentarios.length > 0" class="lista-comentarios__badge">
           {{ comentarios.length }}
@@ -20,9 +20,9 @@
           ></div>
         </div>
         <div class="lista-comentarios__termometro-info">
-          <span class="text-acessivel">✅ {{ totalAcessiveis }} acessível{{ totalAcessiveis !== 1 ? 'is' : '' }}</span>
+          <span class="text-acessivel"><CheckCircle :size="14" style="vertical-align: text-bottom; margin-right: 4px;" /> {{ totalAcessiveis }} acessível{{ totalAcessiveis !== 1 ? 'is' : '' }}</span>
           <span aria-hidden="true"> · </span>
-          <span class="text-nao-acessivel">❌ {{ totalBarreiras }} com barreiras</span>
+          <span class="text-nao-acessivel"><XCircle :size="14" style="vertical-align: text-bottom; margin-right: 4px;" /> {{ totalBarreiras }} com barreiras</span>
           <span aria-hidden="true"> · </span>
           <span class="text-percentual">{{ percentualAcessivel }}% positivo</span>
         </div>
@@ -31,12 +31,12 @@
 
     <!-- Carregando -->
     <div v-if="carregando" class="lista-comentarios__carregando" role="status" aria-live="polite">
-      <span aria-hidden="true">⟳</span> Carregando avaliações...
+      <Loader2 aria-hidden="true" :size="16" /> Carregando avaliações...
     </div>
 
     <!-- Vazio -->
     <div v-if="!carregando && comentarios.length === 0" class="lista-comentarios__vazio">
-      <span class="lista-comentarios__vazio-icone">📭</span>
+      <Inbox class="lista-comentarios__vazio-icone" :size="40" />
       <p class="lista-comentarios__vazio-texto">
         Ainda não há avaliações para este local.<br />Seja o primeiro a contribuir!
       </p>
@@ -52,10 +52,12 @@
       >
         <div class="lista-comentarios__item-header">
           <span class="lista-comentarios__status" :class="av.acessivel ? 'status-sim' : 'status-nao'">
-            {{ av.acessivel ? '✅ Acessível' : '❌ Com barreiras' }}
+            <CheckCircle v-if="av.acessivel" :size="14" style="vertical-align: text-bottom; margin-right: 4px;" />
+            <XCircle v-else :size="14" style="vertical-align: text-bottom; margin-right: 4px;" />
+            {{ av.acessivel ? 'Acessível' : 'Com barreiras' }}
           </span>
           <div class="lista-comentarios__meta">
-            <span>👤 {{ av.autor }}</span>
+            <span><User :size="14" style="vertical-align: text-bottom; margin-right: 4px;" /> {{ av.autor }}</span>
             <time :datetime="av.data">{{ dataRelativa(av.data) }}</time>
           </div>
         </div>
@@ -76,6 +78,8 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
 import { listarComentarios, avaliacoesStore } from '@/services/avaliacoesService.js'
+import { MessageSquare, CheckCircle, XCircle, Inbox, User, Loader2 } from 'lucide-vue-next'
+
 
 const props = defineProps({
   localId:  { type: Number, required: true },

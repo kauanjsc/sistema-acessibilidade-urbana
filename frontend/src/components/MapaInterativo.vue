@@ -14,7 +14,7 @@
         :aria-pressed="visualizacao === 'mapa'"
         @click="visualizacao = 'mapa'"
       >
-        <span aria-hidden="true">🗺️</span> Mapa
+        <MapIcon aria-hidden="true" :size="18" style="display: inline; vertical-align: text-bottom; margin-right: 4px;" /> Mapa
       </button>
       <button
         class="br-button"
@@ -23,7 +23,7 @@
         :aria-pressed="visualizacao === 'tabela'"
         @click="visualizacao = 'tabela'"
       >
-        <span aria-hidden="true">📋</span> Tabela
+        <Table aria-hidden="true" :size="18" style="display: inline; vertical-align: text-bottom; margin-right: 4px;" /> Tabela
       </button>
     </div>
 
@@ -94,7 +94,9 @@
             <th scope="col">Bairro</th>
             <th scope="col">Nível</th>
             <th scope="col" v-for="(meta, chave) in RECURSOS_META" :key="chave">
-              <abbr :title="meta.label">{{ meta.icone }}</abbr>
+              <abbr :title="meta.label">
+                <component :is="mapaIconesTabela[meta.icone]" :size="18" aria-hidden="true" />
+              </abbr>
             </th>
             <th scope="col"><span class="sr-only">Ação</span></th>
           </tr>
@@ -128,7 +130,8 @@
               :aria-label="`${meta.label}: ${local.acessibilidade[chave] ? 'disponível' : 'não disponível'}`"
             >
               <span :class="local.acessibilidade[chave] ? 'text-sim' : 'text-nao'" aria-hidden="true">
-                {{ local.acessibilidade[chave] ? '✓' : '✗' }}
+                <Check v-if="local.acessibilidade[chave]" :size="16" style="vertical-align: text-bottom;" />
+                <X v-else :size="16" style="vertical-align: text-bottom;" />
               </span>
             </td>
             <td>
@@ -153,6 +156,17 @@
 import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import BadgeAcessibilidade from '@/components/BadgeAcessibilidade.vue'
 import { RECURSOS_META } from '@/services/acessibilidadeService.js'
+import { Accessibility, Users, CircleParking, ArrowUpCircle, DoorOpen, Footprints, Map as MapIcon, Table, Check, X } from 'lucide-vue-next'
+
+// Dicionário para traduzir a string do service para o ícone
+const mapaIconesTabela = {
+  'Accessibility': Accessibility,
+  'Users': Users,
+  'ParkingCircle': CircleParking, 
+  'ArrowUpCircle': ArrowUpCircle,
+  'DoorOpen': DoorOpen,
+  'Footprints': Footprints
+}
 
 const props = defineProps({
   locais: { type: Array, default: () => [] },

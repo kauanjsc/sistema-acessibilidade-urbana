@@ -7,7 +7,7 @@
     <div class="container app-footer__inner">
 
       <div class="app-footer__brand">
-        <span aria-hidden="true" class="app-footer__icon">♿</span>
+        <Accessibility aria-hidden="true" class="app-footer__icon" :size="32" />
         <div>
           <p class="app-footer__name">Teresina Acessível</p>
           <p class="app-footer__desc">
@@ -57,6 +57,7 @@
 </template>
 
 <script setup>
+import { Accessibility } from 'lucide-vue-next'
 const currentYear = new Date().getFullYear()
 </script>
 
